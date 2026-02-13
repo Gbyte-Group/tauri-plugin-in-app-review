@@ -58,7 +58,25 @@ fn main() {
 }
 ```
 
----
+-- [x] **iOS**: Uses StoreKit APIs
+- [x] **Android**: Uses Google Play In-App Review API
+- [ ] Desktop platforms (not applicable)
+
+## Android-Specific Notes
+
+The Google Play In-App Review API:
+- Only works on Android 5.0 (API level 21) or higher with Google Play Store installed
+- Has quota limits to prevent abuse (typically allows showing the dialog a few times per year per user)
+- The API doesn't guarantee the dialog will show (depends on quota and Google Play policies)
+- Shows a native rating dialog with stars (1-5) and optional comment
+- The API doesn't indicate whether the user actually reviewed or if the dialog was shown
+
+### Testing on Android
+
+To test the in-app review flow on Android:
+1. Use **Internal App Sharing** or **Internal Test Track** in Google Play Console
+2. Install your app through Google Play (not via Android Studio)
+3. The review dialog will only appear when installed from Google Play
 
 ## Usage (Conceptual Example)
 

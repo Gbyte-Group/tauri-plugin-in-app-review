@@ -1,11 +1,11 @@
 {
   "productName": "tauri-app",
   "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "com.gbyte.tauriapp",
   "build": {
     "beforeDevCommand": "pnpm dev --host",
     "beforeBuildCommand": "pnpm build",
-    "devUrl": "http://192.168.10.39:1420",
+    "devUrl": "http://192.168.1.23:1420",
     "frontendDist": "../dist"
   },
   "app": {

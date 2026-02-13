@@ -1,17 +1,29 @@
-/.vs
+# OS
 .DS_Store
-.Thumbs.db
-*.sublime*
+Thumbs.db
+
+# IDE
+.vs/
 .idea/
+.vscode/
+*.sublime*
+
+# Logs
 debug.log
-package-lock.json
-.vscode/settings.json
-yarn.lock
 
-/.tauri
-/target
-Cargo.lock
+# Node
 node_modules/
+dist/
+dist-js/
 
-dist-js
-dist
+# Rust
+/target/
+
+# Tauri
+/.tauri
+src-tauri/gen/
+
+# Android / Gradle
+.gradle/
+**/.gradle/
+**/build/

@@ -46,7 +46,7 @@
   </div>
 
   <div>
-    <button onclick={requestReview}>requestReview</button>
+    <button onclick={() => { console.log('Frontend: requestReview button clicked'); requestReview(); }}>requestReview</button>
   </div>
 </main>
 
