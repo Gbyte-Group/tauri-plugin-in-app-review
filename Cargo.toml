@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-in-app-review"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Gbyte"]
 description = "Allows requesting app ratings within the app, without leaving the current application."
 edition = "2021"
