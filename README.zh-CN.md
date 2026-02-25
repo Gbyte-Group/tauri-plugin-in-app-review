@@ -8,17 +8,11 @@
 
 ---
 
-### iOS 策略 (StoreKit)
+## 平台支持
 
-当您在发布的应用程序中调用此 API 时，系统会显示一个评分和评论请求视图，并为您处理整个过程。尽管您通常会在应用程序的用户体验流程中适时调用此方法，但 App Store 的政策决定了评分和评论请求视图的实际显示。当您的应用调用此 API 时，StoreKit 会使用以下标准：
-
-- 如果用户尚未在此设备上对您的应用进行评分或评论，StoreKit 将在 365 天内最多显示三次评分和评论请求。
-
-- 如果用户已在此设备上对您的应用进行评分或评论，如果应用版本是新的，并且自用户上次评论以来已超过 365 天，StoreKit 将显示评分和评论请求。
-
-用户可以随时在 App Store 上评论您的应用。为了方便用户留下评论，您可以在应用的设置或配置屏幕中包含一个指向您 App Store 产品页面的永久链接。将查询参数 `action=write-review` 附加到您的产品页面 URL，以自动打开用户可以撰写评论的 App Store 页面。
-
-您可以查看 [Apple 开发者文档](https://developer.apple.com/documentation/storekit/requestreviewaction)
+- [x] **iOS**: 使用 StoreKit API
+- [x] **Android**: 使用 Google Play In-App Review API
+- [ ] 桌面平台 (不适用)
 
 ---
 
@@ -36,14 +30,12 @@ yarn add @gbyte/tauri-plugin-in-app-review
 
 ```toml
 [dependencies]
-tauri-plugin-in-app-review = { git = "https://github.com/Gbyte-Group/tauri-plugin-in-app-review", tag = "v0.1.0" }
+tauri-plugin-in-app-review = "0.2"
 ```
 
 或使用 `cargo add`:
 
-```bash
-cargo add --git https://github.com/Gbyte-Group/tauri-plugin-in-app-review tauri-plugin-in-app-review
-```
+`cargo add tauri-plugin-in-app-review`.
 
 在您的 `src-tauri/capabilities/default.json` 中配置插件权限：
 
@@ -64,15 +56,24 @@ fn main() {
 }
 ```
 
-## 平台支持
+## iOS 政策
 
-- [x] **iOS**: 使用 StoreKit API
-- [x] **Android**: 使用 Google Play In-App Review API
-- [ ] 桌面平台 (不适用)
+当您在发布的应用程序中调用此 API 时，系统会显示一个评分和评论请求视图，并为您处理整个过程。尽管您通常会在应用程序的用户体验流程中适时调用此方法，但 App Store 的政策决定了评分和评论请求视图的实际显示。当您的应用调用此 API 时，StoreKit 会使用以下标准：
+
+- 如果用户尚未在此设备上对您的应用进行评分或评论，StoreKit 将在 365 天内最多显示三次评分和评论请求。
+
+- 如果用户已在此设备上对您的应用进行评分或评论，如果应用版本是新的，并且自用户上次评论以来已超过 365 天，StoreKit 将显示评分和评论请求。
+
+用户可以随时在 App Store 上评论您的应用。为了方便用户留下评论，您可以在应用的设置或配置屏幕中包含一个指向您 App Store 产品页面的永久链接。将查询参数 `action=write-review` 附加到您的产品页面 URL，以自动打开用户可以撰写评论的 App Store 页面。
+
+您可以查看 [Apple 开发者文档](https://developer.apple.com/documentation/storekit/requestreviewaction)
+
+---
 
 ## Android 特别说明
 
 关于 Google Play In-App Review API：
+
 - 仅适用于安装了 Google Play 商店的 Android 5.0 (API level 21) 及更高版本。
 - 存在配额限制以防止滥用（通常允许每个用户每年显示几次对话框）。
 - API 不保证对话框一定会显示（取决于配额和 Google Play 政策）。
@@ -82,9 +83,12 @@ fn main() {
 ### 在 Android 上测试
 
 要在 Android 上测试应用内评价流程：
+
 1. 在 Google Play Console 中使用 **内部应用分享 (Internal App Sharing)** 或 **内部测试轨道 (Internal Test Track)**。
 2. 必须通过 Google Play 安装您的应用（而不是通过 Android Studio 直接运行）。
 3. 只有从 Google Play 安装时，评价对话框才会出现。
+
+您可以查看 [Android 开发者文档](https://developer.android.google.cn/guide/playcore/in-app-review)
 
 ## 用法 (概念示例)
 
@@ -114,10 +118,10 @@ export function SuccessModal({ close }) {
       <footer>
         {/**
          *
-         * Because this API may not present an alert, don’t call it in response to a button tap or other user action.
+         * 因为此 API 可能不会显示警告框，所以不要在用户点击按钮或其他用户操作时调用它。
          *
-         * Can see https://developer.apple.com/design/human-interface-guidelines/ratings-and-reviews
-         *
+         * 可以查看 https://developer.apple.com/design/human-interface-guidelines/ratings-and-reviews
+         * 和 https://developer.android.google.cn/guide/playcore/in-app-review#testing
          */}
         <button onClick={onSuccess}>Yes</button>
         <button onClick={close}>No</button>
